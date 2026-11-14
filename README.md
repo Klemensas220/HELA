@@ -61,8 +61,9 @@ cd HELA
 ### 2. Sukurkite virtualią aplinką
 
 ```powershell
-python -m venv .venv
+py -m venv .venv
 ```
+
 
 ### 3. Įdiekite reikalingas bibliotekas
 
