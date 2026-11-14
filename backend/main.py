@@ -11,6 +11,9 @@ from backend.database import delete_expense
 from backend.analysis import analyze_expense
 from backend.analysis import detect_anomalies
 from backend.analysis import forecast_expenses
+from pathlib import Path
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     create_database()
@@ -108,5 +111,16 @@ def get_forecast(client_id: int):
          **forecast_expenses(expenses)
     }
 
+FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend"
+
+app.mount(
+    "/ui",
+    StaticFiles(directory=FRONTEND_DIR),
+    name="ui"
+)
+
+@app.get("/app")
+def show_frontend():
+    return FileResponse(FRONTEND_DIR / "index.html")
 
 

@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HELA – Išlaidų valdymas</title>
+    <link rel="stylesheet" href="/ui/style.css">
+    <script src="/ui/script.js" defer></script>
+</head>
+<body>
+    <main class="container">
+        <header>
+            <h1>HELA</h1>
+            <p>Namų išlaidų analizės ir prognozavimo sistema</p>
+        </header>
+
+        <section class="card">
+            <h2>Finansų apžvalga</h2>
+            <div class="summary">
+                <div class="summary-item">
+                    <span>Visos išlaidos</span>
+                    <strong id="total">0,00 €</strong>
+                </div>
+                <div class="summary-item">
+                    <span>Kito mėnesio prognozė</span>
+                    <strong id="forecast">–</strong>
+                </div>
+                <div class="summary-item">
+                    <span>Didžiausia kategorija</span>
+                    <strong id="topCategory">–</strong>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2 id="formTitle">Pridėti išlaidą</h2>
+
+            <form id="expenseForm">
+                <div class="form-grid">
+                    <label>
+                        Suma (€)
+                        <input id="amount" type="number"
+                               min="0.01" step="0.01" required>
+                    </label>
+
+                    <label>
+                        Kategorija
+                        <select id="category" required>
+                            <option value="">Pasirinkite</option>
+                            <option>Maistas</option>
+                            <option>Transportas</option>
+                            <option>Būstas</option>
+                            <option>Pramogos</option>
+                            <option>Sveikata</option>
+                            <option>Kita</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        Data
+                        <input id="spent_on" type="date" required>
+                    </label>
+
+                    <label>
+                        Aprašymas
+                        <input id="description" type="text"
+                               placeholder="Pvz., pietūs">
+                    </label>
+                </div>
+
+                <div class="actions">
+                    <button type="submit" id="saveButton">
+                        Pridėti išlaidą
+                    </button>
+                    <button type="button" id="cancelButton"
+                            class="secondary" hidden>
+                        Atšaukti
+                    </button>
+                </div>
+            </form>
+            <p id="message" role="status"></p>
+        </section>
+
+        <section class="card">
+            <h2>Išlaidų sąrašas</h2>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Kategorija</th>
+                            <th>Aprašymas</th>
+                            <th>Suma</th>
+                            <th>Veiksmai</th>
+                        </tr>
+                    </thead>
+                    <tbody id="expensesTable"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Išlaidos pagal kategorijas</h2>
+            <div id="categories"></div>
+        </section>
+
+        <section class="card">
+            <h2>Neįprastos išlaidos</h2>
+            <div id="anomalies"></div>
+        </section>
+    </main>
+</body>
+</html>
