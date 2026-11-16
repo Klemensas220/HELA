@@ -56,6 +56,13 @@ def add_expense(client_id, amount, category, description, spent_on):
 
             return cursor.lastrowid
 
+def get_clients():
+    with closing(get_connection()) as connection:
+        cursor = connection.execute(
+        "SELECT id, name FROM clients ORDER BY id"
+         )
+        return [dict(row) for row in cursor.fetchall()]
+
 def get_expenses(client_id):
     with closing(get_connection()) as connection:
         cursor = connection.execute("""

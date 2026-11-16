@@ -1,4 +1,3 @@
-
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from backend.database import create_database
@@ -11,6 +10,7 @@ from backend.database import delete_expense
 from backend.analysis import analyze_expense
 from backend.analysis import detect_anomalies
 from backend.analysis import forecast_expenses
+from backend.database import get_clients
 from pathlib import Path
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -27,6 +27,9 @@ app = FastAPI(title="HELA API", lifespan=lifespan)
 def home():
     return {"message": "HELA sistema veikia!"}
 
+@app.get("/clients")
+def read_clients():
+    return get_clients()
 
 
 @app.post("/expense")

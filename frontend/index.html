@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HELA – Išlaidų valdymas</title>
     <link rel="stylesheet" href="/ui/style.css">
-    <script src="/ui/script.js" defer></script>
+    <script src="/ui/script.js?v=7" defer></script>
 </head>
 <body>
     <main class="container">
@@ -16,16 +16,31 @@
         </header>
 
         <section class="card">
+            <h2>Kliento pasirinkimas</h2>
+
+            <label for="clientSelect">Pasirinkite šeimą</label>
+
+            <select id="clientSelect" disabled>
+                <option value="">Kraunama...</option>
+            </select>
+
+            <p id="activeClient"></p>
+        </section>
+
+        <section class="card">
             <h2>Finansų apžvalga</h2>
+
             <div class="summary">
                 <div class="summary-item">
                     <span>Visos išlaidos</span>
-                    <strong id="total">0,00 €</strong>
+                    <strong id="total">–</strong>
                 </div>
+
                 <div class="summary-item">
                     <span>Kito mėnesio prognozė</span>
                     <strong id="forecast">–</strong>
                 </div>
+
                 <div class="summary-item">
                     <span>Didžiausia kategorija</span>
                     <strong id="topCategory">–</strong>
@@ -40,20 +55,19 @@
                 <div class="form-grid">
                     <label>
                         Suma (€)
-                        <input id="amount" type="number"
-                               min="0.01" step="0.01" required>
+                        <input id="amount" type="number" min="0.01" step="0.01" required>
                     </label>
 
                     <label>
                         Kategorija
                         <select id="category" required>
                             <option value="">Pasirinkite</option>
-                            <option>Maistas</option>
-                            <option>Transportas</option>
-                            <option>Būstas</option>
-                            <option>Pramogos</option>
-                            <option>Sveikata</option>
-                            <option>Kita</option>
+                            <option value="Maistas">Maistas</option>
+                            <option value="Transportas">Transportas</option>
+                            <option value="Būstas">Būstas</option>
+                            <option value="Pramogos">Pramogos</option>
+                            <option value="Sveikata">Sveikata</option>
+                            <option value="Kita">Kita</option>
                         </select>
                     </label>
 
@@ -64,26 +78,27 @@
 
                     <label>
                         Aprašymas
-                        <input id="description" type="text"
-                               placeholder="Pvz., pietūs">
+                        <input id="description" type="text" placeholder="Pvz., pietūs">
                     </label>
                 </div>
 
                 <div class="actions">
-                    <button type="submit" id="saveButton">
+                    <button type="submit" id="saveButton" disabled>
                         Pridėti išlaidą
                     </button>
-                    <button type="button" id="cancelButton"
-                            class="secondary" hidden>
+
+                    <button type="button" id="cancelButton" class="secondary" hidden>
                         Atšaukti
                     </button>
                 </div>
             </form>
+
             <p id="message" role="status"></p>
         </section>
 
         <section class="card">
             <h2>Išlaidų sąrašas</h2>
+
             <div class="table-wrap">
                 <table>
                     <thead>
@@ -95,6 +110,7 @@
                             <th>Veiksmai</th>
                         </tr>
                     </thead>
+
                     <tbody id="expensesTable"></tbody>
                 </table>
             </div>
